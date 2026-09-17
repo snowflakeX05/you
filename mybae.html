@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>เช้านี้ของอ้วน</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Thai:wght@400;500;600&family=Noto+Sans+Thai:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FBF1EA;
+    --bg-soft: #F5E4DB;
+    --ink: #3E2A2F;
+    --ink-soft: #7A5B5F;
+    --rose: #D9707A;
+    --peach: #E3A26B;
+    --lavender: #B98FBE;
+    --line: rgba(62, 42, 47, 0.14);
+    --card-bg: #FFFBF8;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #241A1D;
+      --bg-soft: #2E2124;
+      --ink: #F3E4E0;
+      --ink-soft: #D0AEB3;
+      --rose: #E38B93;
+      --peach: #E8B77F;
+      --lavender: #CDA5D4;
+      --line: rgba(243, 228, 224, 0.16);
+      --card-bg: #2B1F22;
+    }
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Noto Sans Thai", sans-serif;
+    font-weight: 300;
+    line-height: 1.9;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  h1, h2, .display {
+    font-family: "Noto Serif Thai", serif;
+    font-weight: 500;
+    margin: 0;
+  }
+
+  .wrap {
+    max-width: 620px;
+    margin: 0 auto;
+    padding: 0 28px 120px;
+    position: relative;
+    z-index: 2;
+  }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    position: relative;
+    min-height: 92vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 40px 28px;
+    overflow: hidden;
+    z-index: 2;
+  }
+
+  .glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 560px;
+    height: 560px;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--peach) 0%, var(--rose) 45%, transparent 72%);
+    opacity: 0;
+    filter: blur(10px);
+    transform: translate(-50%, -50%) scale(0.7);
+    animation: bloom 2.6s ease-out forwards;
+    z-index: -1;
+  }
+
+  @keyframes bloom {
+    0%   { opacity: 0; transform: translate(-50%, -50%) scale(0.55); }
+    55%  { opacity: 0.55; }
+    100% { opacity: 0.34; transform: translate(-50%, -50%) scale(1); }
+  }
+
+  .eyebrow-line {
+    position: relative;
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+    opacity: 0;
+    animation: rise 1s ease-out 0.3s forwards;
+  }
+
+  .hero h1 {
+    position: relative;
+    font-size: clamp(2.1rem, 8vw, 3.1rem);
+    margin-top: 14px;
+    line-height: 1.35;
+    opacity: 0;
+    animation: rise 1s ease-out 0.6s forwards;
+  }
+
+  .hero .sub {
+    position: relative;
+    margin-top: 20px;
+    max-width: 30em;
+    color: var(--ink-soft);
+    font-size: 1.02rem;
+    opacity: 0;
+    animation: rise 1s ease-out 1s forwards;
+  }
+
+  .hero .sub strong { color: var(--rose); font-weight: 500; }
+
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .scroll-hint {
+    position: relative;
+    margin-top: 56px;
+    font-size: 0.8rem;
+    color: var(--ink-soft);
+    opacity: 0;
+    animation: rise 1s ease-out 1.4s forwards;
+  }
+
+  /* ---------- Sections ---------- */
+  section {
+    padding: 54px 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .kicker {
+    font-size: 0.92rem;
+    color: var(--rose);
+    margin-bottom: 10px;
+  }
+
+  section h2 {
+    font-size: clamp(1.4rem, 5vw, 1.75rem);
+    margin-bottom: 22px;
+    max-width: 15em;
+  }
+
+  p { margin: 0 0 16px; color: var(--ink); }
+  p:last-child { margin-bottom: 0; }
+  .soft { color: var(--ink-soft); }
+
+  /* ---------- Care list ---------- */
+  .care-list {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    margin-top: 26px;
+  }
+
+  .care-item {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    padding: 18px 20px;
+    background: var(--card-bg);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+  }
+
+  .care-item svg {
+    flex-shrink: 0;
+    width: 30px;
+    height: 30px;
+    stroke: var(--rose);
+    fill: none;
+    stroke-width: 1.5;
+    margin-top: 2px;
+  }
+
+  .care-item .t {
+    font-family: "Noto Serif Thai", serif;
+    font-size: 1.02rem;
+    margin-bottom: 4px;
+    color: var(--ink);
+  }
+
+  .care-item .d {
+    font-size: 0.94rem;
+    color: var(--ink-soft);
+    margin: 0;
+  }
+
+  /* ---------- Battery Section (ไอเดียใหม่!) ---------- */
+  .battery-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 30px;
+    background: var(--card-bg);
+    padding: 35px 20px;
+    border-radius: 20px;
+    border: 1px solid var(--line);
+  }
+
+  .battery-container {
+    position: relative;
+  }
+
+  .battery {
+    position: relative;
+    width: 150px;
+    height: 56px;
+    border: 4px solid var(--ink);
+    border-radius: 12px;
+    padding: 4px;
+    display: flex;
+    margin-bottom: 28px;
+  }
+
+  .battery::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: -10px;
+    transform: translateY(-50%);
+    width: 6px;
+    height: 22px;
+    background: var(--ink);
+    border-radius: 0 4px 4px 0;
+  }
+
+  .battery-fill {
+    height: 100%;
+    width: 5%;
+    background: var(--rose);
+    border-radius: 6px;
+    transition: width 0.1s linear, box-shadow 0.3s;
+  }
+
+  .battery-fill.full {
+    box-shadow: 0 0 15px var(--rose);
+  }
+
+  .charge-btn {
+    background: var(--bg-soft);
+    color: var(--ink);
+    border: 2px solid var(--rose);
+    padding: 14px 28px;
+    border-radius: 999px;
+    font-family: "Noto Sans Thai", sans-serif;
+    font-size: 1.05rem;
+    font-weight: 500;
+    cursor: pointer;
+    /* ป้องกันการคลุมดำและเมนูเด้งตอนกดค้างในมือถือ */
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
+    touch-action: manipulation;
+    transition: transform 0.1s, background 0.2s, color 0.2s, box-shadow 0.2s;
+  }
+
+  .charge-btn:active, .charge-btn.active {
+    background: var(--rose);
+    color: #fff;
+    transform: scale(0.95);
+    box-shadow: 0 6px 20px rgba(217, 112, 122, 0.4);
+  }
+
+  .charge-msg {
+    margin-top: 0;
+    font-family: "Noto Serif Thai", serif;
+    color: var(--rose);
+    font-size: 1.1rem;
+    line-height: 1.7;
+    text-align: center;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.6s ease, opacity 0.6s ease, margin-top 0.6s ease;
+  }
+
+  .charge-msg.show {
+    max-height: 120px;
+    opacity: 1;
+    margin-top: 24px;
+  }
+
+  .charging-heart {
+    position: absolute;
+    font-size: 1.2rem;
+    pointer-events: none;
+    animation: floatUpBattery 0.8s ease-out forwards;
+    z-index: 10;
+  }
+
+  @keyframes floatUpBattery {
+    0% { transform: translateY(0) scale(0.5); opacity: 1; }
+    100% { transform: translateY(-40px) scale(1.3); opacity: 0; }
+  }
+
+  /* ---------- Letter & Polaroid ---------- */
+  .letter p { font-size: 1.03rem; }
+  
+  .signoff {
+    margin-top: 28px;
+    font-family: "Noto Serif Thai", serif;
+    font-size: 1.1rem;
+    color: var(--rose);
+  }
+
+  .photo-toggle {
+    margin-top: 30px;
+    background: none;
+    border: 1px solid var(--rose);
+    color: var(--rose);
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: "Noto Sans Thai", sans-serif;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+  }
+  
+  .photo-toggle:hover {
+    background: var(--rose);
+    color: #fff;
+  }
+
+  .polaroid-reveal {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.8s ease, opacity 0.6s ease;
+    display: flex;
+    justify-content: center;
+  }
+
+  .polaroid-reveal.open {
+    max-height: 500px;
+    opacity: 1;
+    margin-top: 20px;
+  }
+
+  .polaroid {
+    background: #fff;
+    padding: 12px 12px 40px 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    transform: rotate(3deg);
+    border-radius: 4px;
+    max-width: 250px;
+    text-align: center;
+  }
+
+  .polaroid img {
+    width: 100%;
+    height: auto;
+    border-radius: 2px;
+  }
+
+  .polaroid p {
+    font-family: "Noto Serif Thai", serif;
+    color: #333;
+    margin: 15px 0 0;
+    font-size: 1.1rem;
+  }
+
+  /* ---------- Hug button ---------- */
+  .hug-block { text-align: center; }
+
+  .hug-btn {
+    position: relative; 
+    z-index: 50; 
+    font-family: "Noto Sans Thai", sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--bg);
+    background: var(--rose);
+    border: none;
+    padding: 16px 34px;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    box-shadow: 0 8px 24px rgba(217, 112, 122, 0.35);
+  }
+
+  .hug-btn:hover { transform: translateY(-2px); }
+  .hug-btn:active { transform: translateY(0) scale(0.98); }
+
+  .hug-reveal {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.7s ease, opacity 0.6s ease, margin-top 0.6s ease;
+  }
+
+  .hug-reveal.open {
+    max-height: 400px;
+    opacity: 1;
+    margin-top: 26px;
+  }
+
+  .hug-card {
+    background: var(--card-bg);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    padding: 28px 26px;
+    font-family: "Noto Serif Thai", serif;
+    font-size: 1.08rem;
+    line-height: 1.85;
+  }
+
+  @keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    15% { transform: scale(1.15); }
+    30% { transform: scale(1); }
+    45% { transform: scale(1.15); }
+    60% { transform: scale(1); }
+  }
+
+  .hug-card .heart {
+    display: block;
+    margin: 0 auto 12px;
+    width: 26px;
+    height: 26px;
+    stroke: var(--rose);
+    fill: rgba(217, 112, 122, 0.15);
+    stroke-width: 1.6;
+    animation: heartbeat 1.5s infinite;
+  }
+
+  /* ---------- Floating & Particle & Rain Hearts ---------- */
+  .floating-heart-icon {
+    position: absolute;
+    pointer-events: none;
+    font-size: 1.2rem;
+    color: var(--rose);
+    animation: floatUp 1.5s ease-out forwards;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+  }
+
+  @keyframes floatUp {
+    0% { opacity: 1; transform: translate(-50%, -50%) scale(0.8); }
+    100% { opacity: 0; transform: translate(-50%, -100px) scale(1.5); }
+  }
+
+  .particle-heart {
+    position: absolute;
+    pointer-events: none;
+    font-size: 1.5rem;
+    animation: explode 1s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+    z-index: 9999;
+  }
+
+  @keyframes explode {
+    0% { transform: translate(-50%, -50%) scale(0.5); opacity: 1; }
+    100% { transform: translate(var(--tx), var(--ty)) scale(1.2) rotate(var(--rot)); opacity: 0; }
+  }
+
+  .rain-emoji {
+    position: fixed;
+    top: -50px;
+    z-index: 99999;
+    font-size: 2rem;
+    pointer-events: none;
+    animation: rainDown linear forwards;
+  }
+
+  @keyframes rainDown {
+    0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+    90% { opacity: 1; }
+    100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+  }
+
+  /* ---------- footer ---------- */
+  footer {
+    text-align: center;
+    padding: 60px 28px 20px;
+    color: var(--ink-soft);
+    font-size: 0.85rem;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .glow, .eyebrow-line, .hero h1, .hero .sub, .scroll-hint, .heart, .floating-heart-icon, .particle-heart, .rain-emoji {
+      animation: none !important;
+    }
+  }
+</style>
+</head>
+<body>
+
+  <div class="hero">
+    <div class="glow" aria-hidden="true"></div>
+    <div class="eyebrow-line">แปะไว้ให้เจอตอนตื่นนอน</div>
+    <h1 id="greetingText">ตื่นแล้วใช่มั้ย อ้วน</h1>
+    <p class="sub">ก่อนจะไปหยิบมือถือเช็คอย่างอื่น อยากให้เจอ<strong>ข้อความนี้</strong>ก่อนเป็นอย่างแรกของวัน</p>
+    <div class="scroll-hint">เลื่อนลงอ่านต่อได้เลยนะครับ ↓</div>
+  </div>
+
+  <div class="wrap">
+
+    <section>
+      <div class="kicker">ช่วงนี้เมนส์มาด้วย</div>
+      <h2>วันนี้ไม่ต้องเก่งก็ได้ ให้ตัวเองพักหน่อยนะ</h2>
+
+      <div class="care-list">
+        <div class="care-item">
+          <svg viewBox="0 0 24 24"><path d="M4 10h13a2 2 0 0 1 2 2v1a5 5 0 0 1-5 5H8a5 5 0 0 1-5-5v-3z" stroke-linecap="round" stroke-linejoin="round"/><path d="M19 11h1.5a2 2 0 0 1 0 4H19" stroke-linecap="round"/><path d="M8 3c-.5.9-.5 1.5 0 2.4M11.5 3c-.5.9-.5 1.5 0 2.4" stroke-linecap="round"/></svg>
+          <div>
+            <div class="t">จิบน้ำอุ่นๆหรืออะไรร้อนๆหน่อยนะครับ</div>
+            <p class="d">น้ำอุ่นๆ ช่วยให้ท้องโล่งขึ้นหน่อย อย่าลืมกินอะไรรองท้องด้วยนะครับ</p>
+          </div>
+        </div>
+
+        <div class="care-item">
+          <svg viewBox="0 0 24 24"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <div>
+            <div class="t">ถ้าง่วงหรือหงุดหงิดง่าย ก็แค่ปล่อยตามใจตัวเอง</div>
+            <p class="d">มีสิทธิ์อารมณ์ขึ้นๆ ลงๆ ได้เต็มที่ ไม่ต้องฝืนยิ้มให้ใครทั้งนั้น</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION ใหม่: แท่นชาร์จพลังใจ (แทนคูปอง) -->
+    <section>
+      <div class="kicker">แบตเตอรี่เหลือน้อยแล้วใช่่มั้ย</div>
+      <h2>แท่นชาร์จพลังใจ 🔋</h2>
+      <p class="soft">รู้ว่าตื่นมาปวดท้องแล้วมันเหนื่อย... เอานิ้วกดปุ่มค้างไว้ เพื่อรับพลังงานความห่วงใยจากพี่นะ</p>
+      
+      <div class="battery-wrap">
+        <div class="battery-container" id="batteryContainer">
+          <div class="battery">
+            <div class="battery-fill" id="batteryFill"></div>
+          </div>
+        </div>
+        <!-- ปุ่มกดค้าง -->
+        <button class="charge-btn" id="chargeBtn" oncontextmenu="return false;">กดค้างไว้เพื่อชาร์จจจจ</button>
+        <!-- ข้อความซ่อน จะโผล่มาตอนชาร์จเต็ม -->
+        <div class="charge-msg" id="chargeMsg">
+          ชาร์จพลังใจเต็ม 100% แล้ว <br>วันนี้ขอให้ปวดท้องน้อยลงนะ รักอ้วนนะรักมากกกก 💖
+        </div>
+      </div>
+    </section>
+
+    <section class="letter">
+      <div class="kicker">จดหมายเช้านี้</div>
+      <h2>ถึงอ้วน</h2>
+      <p>เช้านี้ตั้งใจฝากข้อความนี้ไว้ให้เป็นสิ่งแรกที่อ้วนได้อ่าน เพราะอยากให้วันเริ่มต้นด้วยความรู้สึกดีๆ ก่อนที่อะไรอย่างอื่นจะเข้ามา</p>
+      <p>ไม่ว่าวันนี้จะเหนื่อยแค่ไหน ปวดท้องแค่ไหน หรือรู้สึกไม่ค่อยโอเคกับตัวเอง อยากให้รู้ไว้ว่ามีคนคนนึงคิดถึงและห่วงใยอ้วนอยู่เสมอ ไม่จำเป็นต้องเก่งแค่เป็นอ้วนแบบที่เป็นอยู่ก็มีค่าพอแล้ว</p>
+      <p>ขอบคุณที่ให้เป็นคนที่ได้ดูแลและอยู่เคียงข้างอ้วนนะ วันนี้ก็เป็นอีกวันที่อยากให้อ้วนใจฟู ยิ้มง่ายขึ้นสักนิดหนึ่ง พี่รักอ้วนนะ 🧸💕</p>
+      <div class="signoff">รักอ้วนที่สุดเลยนะ</div>
+      
+      <button class="photo-toggle" id="photoBtn" onclick="togglePhoto(event)">📸 กดดูหน้าคนที่จะดูแลอ้วนวันนี้สิ</button>
+      
+      <div class="polaroid-reveal" id="photoReveal">
+        <div class="polaroid">
+          <img src="you.jpeg" alt="รูปคู่ของเรา">
+          <p>รักนะอ้วนนน 🐷</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="hug-block">
+      <div class="kicker">อยากได้อะไรตอนนี้</div>
+      <h2>กดปุ่มนี้ถ้าอยากให้กอด</h2>
+      <button class="hug-btn" id="hugBtn" aria-expanded="false" aria-controls="hugReveal">กอดหน่อยสิ</button>
+      <div class="hug-reveal" id="hugReveal">
+        <div class="hug-card">
+          <svg class="heart" viewBox="0 0 24 24"><path d="M12 20c4-2.5 7-5.9 7-9.4C19 7.5 16.8 5 14 5c-.8 0-1.6.3-2 1-.4-.7-1.2-1-2-1-2.8 0-5 2.5-5 5.6C5 14.1 8 17.5 12 20z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          กอดแน่นๆ เลยนะอ้วน<br>เอาเป็นกอดทิพย์ไปก่อนนะ 😚<br>“เหนื่อยแล้วก็พักได้ มีพี่อยู่ตรงนี้เสมอ รักนะมั๊วะะะ”
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      แปะไว้ตอนที่อ้วนยังหลับอยู่ หวังว่าตื่นมาแล้วจะยิ้มได้ 🤍
+    </footer>
+
+  </div>
+
+  <script>
+    // 1. ทักทายตามเวลา
+    const currentHour = new Date().getHours();
+    const greetingElement = document.getElementById('greetingText');
+    if (currentHour >= 4 && currentHour < 8) {
+      greetingElement.innerHTML = "ตื่นเช้าจังเลย อ้วน ☀️ มอนิ่งนะครับ";
+    } else if (currentHour >= 8 && currentHour < 12) {
+      greetingElement.innerHTML = "ตื่นแล้วใช่มั้ย อ้วน 🌤️ มอนิ่งนะครับ";
+    } else if (currentHour >= 12 && currentHour < 16) {
+      greetingElement.innerHTML = "ตื่นสายเลยนะอ้วน กินข้าวด้วย 🧸 มอนิ่งนะครับ";
+    } else {
+      greetingElement.innerHTML = "ตื่นแล้วใช่มั้ย อ้วน 💕 มอนิ่งนะครับ";
+    }
+
+    // 2. เอฟเฟกต์กดปุ่มกอด + กอดอีกที (Rain Shower)
+    const btn = document.getElementById('hugBtn');
+    const reveal = document.getElementById('hugReveal');
+    
+    btn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      const wasOpen = reveal.classList.contains('open'); 
+      const isOpen = reveal.classList.toggle('open');
+      btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      btn.textContent = isOpen ? 'กอดอีกทีนะ 🤍' : 'กอดหน่อยสิ';
+
+      if (!wasOpen) {
+        const rect = btn.getBoundingClientRect();
+        const x = rect.left + rect.width / 2 + window.scrollX;
+        const y = rect.top + rect.height / 2 + window.scrollY;
+        
+        for (let i = 0; i < 15; i++) {
+          const p = document.createElement('div');
+          const icons = ['💖', '🤍', '✨', '🌸'];
+          p.innerHTML = icons[Math.floor(Math.random() * icons.length)];
+          p.className = 'particle-heart';
+          p.style.left = x + 'px';
+          p.style.top = y + 'px';
+          
+          const angle = Math.random() * Math.PI * 2;
+          const distance = Math.random() * 80 + 50; 
+          const tx = Math.cos(angle) * distance + 'px';
+          const ty = Math.sin(angle) * distance + 'px';
+          const rot = Math.random() * 360 + 'deg'; 
+          
+          p.style.setProperty('--tx', tx);
+          p.style.setProperty('--ty', ty);
+          p.style.setProperty('--rot', rot);
+          
+          document.body.appendChild(p);
+          setTimeout(() => { p.remove(); }, 1000);
+        }
+      } 
+      else {
+        for (let i = 0; i < 30; i++) {
+          setTimeout(() => {
+            const el = document.createElement('div');
+            el.className = 'rain-emoji';
+            const emojis = ['🤍', '🤗', '✨', '🩹', '💖']; 
+            el.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
+            
+            el.style.left = (Math.random() * 100) + 'vw';
+            const fallDuration = Math.random() * 2 + 2;
+            el.style.animationDuration = fallDuration + 's';
+            el.style.transform = `scale(${Math.random() * 0.5 + 0.8})`;
+
+            document.body.appendChild(el);
+            setTimeout(() => el.remove(), fallDuration * 1000);
+          }, i * 80); 
+        }
+        reveal.classList.add('open');
+      }
+    });
+
+    // 3. ระบบ "แท่นชาร์จพลังใจ" (กดค้าง)
+    let chargeInterval;
+    let batteryLevel = 5;
+    let isFullyCharged = false;
+    const batteryFill = document.getElementById('batteryFill');
+    const chargeBtn = document.getElementById('chargeBtn');
+    const chargeMsg = document.getElementById('chargeMsg');
+    const batteryContainer = document.getElementById('batteryContainer');
+
+    function startCharging(e) {
+      if (isFullyCharged) return;
+      chargeBtn.classList.add('active');
+      chargeBtn.innerText = "กำลังชาร์จ... 💖";
+      
+      // ให้แบตวิ่งขึ้นทีละ 2% ทุกๆ 40ms (จะเต็มในประมาณ 2 วินาที)
+      chargeInterval = setInterval(() => {
+        if (batteryLevel < 100) {
+          batteryLevel += 2; 
+          if(batteryLevel > 100) batteryLevel = 100;
+          batteryFill.style.width = batteryLevel + '%';
+          
+          // สุ่มหัวใจลอยออกจากแบต
+          if (batteryLevel % 10 === 0) {
+            spawnChargeHeart();
+          }
+        } else {
+          // แบตเต็ม 100% แล้ว
+          isFullyCharged = true;
+          clearInterval(chargeInterval);
+          batteryFill.classList.add('full'); // ใส่แสงเรืองรองให้แบต
+          chargeMsg.classList.add('show'); // โชว์ข้อความ
+          chargeBtn.innerText = "พลังงานเต็มเปี่ยม! ✨";
+          chargeBtn.style.pointerEvents = 'none'; // ล็อกปุ่ม
+          chargeBtn.classList.remove('active');
+        }
+      }, 40); 
+    }
+
+    function stopCharging(e) {
+      if (isFullyCharged) return;
+      clearInterval(chargeInterval);
+      chargeBtn.classList.remove('active');
+      chargeBtn.innerText = "กดค้างไว้เพื่อชาร์จจจจ";
+    }
+
+    function spawnChargeHeart() {
+      const heart = document.createElement('div');
+      const icons = ['💖', '✨', '🩹']; // ไอคอนที่จะลอยออกมา
+      heart.innerHTML = icons[Math.floor(Math.random() * icons.length)];
+      heart.className = 'charging-heart';
+      // สุ่มให้ออกมาจากแถวๆ ถ่านแบตเตอรี่
+      heart.style.left = (Math.random() * 120 + 10) + 'px';
+      heart.style.top = '-10px';
+      batteryContainer.appendChild(heart);
+      setTimeout(() => heart.remove(), 800);
+    }
+
+    // จับการกดเมาส์ (คอม) และ การจิ้มจอ (มือถือ)
+    chargeBtn.addEventListener('mousedown', startCharging);
+    chargeBtn.addEventListener('touchstart', startCharging, {passive: true});
+    window.addEventListener('mouseup', stopCharging);
+    window.addEventListener('touchend', stopCharging);
+    window.addEventListener('touchcancel', stopCharging);
+
+    // 4. ระบบเปิดปิดรูปโพลารอยด์
+    function togglePhoto(event) {
+      event.stopPropagation();
+      const photoReveal = document.getElementById('photoReveal');
+      const photoBtn = document.getElementById('photoBtn');
+      const isOpen = photoReveal.classList.toggle('open');
+      photoBtn.textContent = isOpen ? '🙈 ปิดรูปเถอะ เขิน' : '📸 กดดูหน้าคนที่จะดูแลอ้วนวันนี้สิ';
+    }
+
+
+    // 6. ลูกเล่นจิ้มหน้าจอตรงไหนก็มีหัวใจลอยขึ้นมา (ปล่อยให้มันทำงานคู่กับปุ่มได้เลย น่ารักดี)
+    document.addEventListener('click', function(e) {
+      const heart = document.createElement('div');
+      heart.innerHTML = '🤍';
+      heart.className = 'floating-heart-icon';
+      heart.style.left = e.pageX + 'px';
+      heart.style.top = e.pageY + 'px';
+      document.body.appendChild(heart);
+      setTimeout(() => { heart.remove(); }, 1500);
+    });
+  </script>
+
+</body>
+</html>
